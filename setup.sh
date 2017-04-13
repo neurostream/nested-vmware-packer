@@ -103,6 +103,6 @@ git clone ${labRepo} .  || git pull
 
 ls -lart
 
-vagrant up --install-provider
+vagrant up 
 
 
