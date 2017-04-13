@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-systemType=$(uname -a)
+systemType=$(uname -s)
 if [[ "${systemType}" != "Darwin" ]]
 then
 	echo "${systemType} system detected." 1>&2
