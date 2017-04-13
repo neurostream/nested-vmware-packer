@@ -36,19 +36,6 @@ fi
 echo "Results of checking for Git:"
 git version
 
-if ! vagrant version 2>/dev/null
-then
-	hashiMirror="https://releases.hashicorp.com"
-	vagrantURI=$(curl -s ${hashiMirror}"$(curl -s ${hashiMirror}/vagrant/ | grep -E "/vagrant/[0-9]" | sort -n | tail -1 | awk -F '\"' '{print $2}')" | grep -i dmg | awk -F 'href=' '{print $2}' | awk -F '"' '{print $2}')
-	echo "vagrant was not found in the execute PATH"
-	if curl -skLRO ${hashiMirror}${vagrantURI}
-	then
-		open $(basename ${vagrantURI})
-	else
-		echo "This setup routine was not able to run the Vagrant install."
-		echo "Vagrant can be downloaded from ${hashiMirror}/vagrant/"
-	fi
-fi
 
 if ! VBoxManage --version 2>/dev/null
 then
@@ -58,12 +45,28 @@ then
 	echo "VBoxManage was not found in the execute PATH"
 	if curl -skLRO ${vbMirror}/${vbURI}
 	then
-		open $(basename ${vbURI})
+		open -W $(basename ${vbURI})
 	else
 		echo "This setup routine was not able to run the Virtualbox install."
 		echo "Virtualbox can be downloaded from ${vbMirror}/virtualbox/"
 	fi
 fi
+
+if ! vagrant version 2>/dev/null
+then
+	hashiMirror="https://releases.hashicorp.com"
+	vagrantURI=$(curl -s ${hashiMirror}"$(curl -s ${hashiMirror}/vagrant/ | grep -E "/vagrant/[0-9]" | sort -n | tail -1 | awk -F '\"' '{print $2}')" | grep -i dmg | awk -F 'href=' '{print $2}' | awk -F '"' '{print $2}')
+	echo "vagrant was not found in the execute PATH"
+	if curl -skLRO ${hashiMirror}${vagrantURI}
+	then
+		open -W $(basename ${vagrantURI})
+	else
+		echo "This setup routine was not able to run the Vagrant install."
+		echo "Vagrant can be downloaded from ${hashiMirror}/vagrant/"
+	fi
+fi
+
+
 
 
 
