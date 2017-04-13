@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+
+labRepo="https://github.com/neurostream/vagrant-lab.git"
 labHome=${HOME}/vagrant/lab
 mkdir -p ${labHome}
 cd ${labHome}
@@ -50,3 +52,16 @@ then
 		echo "Vagrant can be downloaded from ${hashiMirror}/vagrant/"
 	fi
 fi
+
+echo "before cd to labHome ( ${labHome} )"
+pwd
+cd ${labHome}
+pwd
+
+echo "Will attempt initial clone of git repo: ${labRepo}"
+git clone ${labRepo}
+
+ls -lart
+
+
+
