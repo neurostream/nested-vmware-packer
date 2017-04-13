@@ -43,9 +43,12 @@ then
 	vbVersion=$(curl -s ${vbMirror} | grep href= | grep -E "\"[0-9]" | grep -vE "RC|BETA" | awk -F '"' '{print $2}'  | awk -F '/' '{print $1}' | tail -1)
 	vbURI=$vbVersion/$(curl -s $vbMirror/$vbVersion | grep -i dmg | grep OSX | awk -F '"' '{print $2}')
 	echo "VBoxManage was not found in the execute PATH"
-	if curl -skLRO ${vbMirror}/${vbURI}
+	if curl -kLRO ${vbMirror}/${vbURI}
 	then
+		touch vbInstall.lock
 		open -W $(basename ${vbURI})
+		ps -ef | grep 'open -W'
+		ps -ef | grep $(basename ${vbURI})
 	else
 		echo "This setup routine was not able to run the Virtualbox install."
 		echo "Virtualbox can be downloaded from ${vbMirror}/virtualbox/"
@@ -57,7 +60,7 @@ then
 	hashiMirror="https://releases.hashicorp.com"
 	vagrantURI=$(curl -s ${hashiMirror}"$(curl -s ${hashiMirror}/vagrant/ | grep -E "/vagrant/[0-9]" | sort -n | tail -1 | awk -F '\"' '{print $2}')" | grep -i dmg | awk -F 'href=' '{print $2}' | awk -F '"' '{print $2}')
 	echo "vagrant was not found in the execute PATH"
-	if curl -skLRO ${hashiMirror}${vagrantURI}
+	if curl -kLRO ${hashiMirror}${vagrantURI}
 	then
 		open -W $(basename ${vagrantURI})
 	else
