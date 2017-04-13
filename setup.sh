@@ -99,7 +99,7 @@ mkdir -p ${projectsHome}
 cd ${projectsHome}
 
 echo "Will attempt initial clone of git repo: ${labRepo}"
-git clone ${labRepo} .
+git clone ${labRepo} .  || git pull
 
 ls -lart
 
