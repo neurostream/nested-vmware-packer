@@ -45,15 +45,19 @@ then
 	echo "VBoxManage was not found in the execute PATH"
 	if curl -kLRO ${vbMirror}/${vbURI}
 	then
-		touch vbInstall.lock
 		open -W $(basename ${vbURI})
-		ps -ef | grep 'open -W'
-		ps -ef | grep $(basename ${vbURI})
 	else
 		echo "This setup routine was not able to run the Virtualbox install."
 		echo "Virtualbox can be downloaded from ${vbMirror}/virtualbox/"
 	fi
 fi
+
+until VBoxManage --version 2>/dev/null
+do
+	echo "Waiting for Virtualbox to be runnable in the PATH"
+	sleep 5
+done
+
 
 if ! vagrant version 2>/dev/null
 then
@@ -69,6 +73,11 @@ then
 	fi
 fi
 
+until vagrant version 2>/dev/null
+do
+	echo "Waiting for Vagrant to be runnable in the PATH"
+	sleep 5
+done
 
 
 
