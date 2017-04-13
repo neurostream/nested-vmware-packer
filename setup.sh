@@ -17,7 +17,7 @@ fi
 
 
 
-if ! xcode-select --print-path 2>/dev/null
+if ! xcode-select --print-path 2>&1 >/dev/null
 	then
 	if  ! git version 2>/dev/null
 	then
