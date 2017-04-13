@@ -12,7 +12,7 @@ fi
 
 
 
-if [[ ! xcode-select --print-path ]] 
+if ! xcode-select --print-path 
 	then
 	if [[ ! git version ]]
 	then
