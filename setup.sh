@@ -36,6 +36,6 @@ if ! vagrant version 2>/dev/null
 then
 	hashiMirror="https://releases.hashicorp.com"
 	vagrantURI=$(curl -s ${hashiMirror}"$(curl -s ${hashiMirror}/vagrant/ | grep -E "/vagrant/[0-9]" | sort -n | tail -1 | awk -F '\"' '{print $2}')" | grep -i dmg | awk -F 'href=' '{print $2}' | awk -F '"' '{print $2}')
-	echo "vagrant was not found in the PATH. It can be downloaded from ${hashiMirror}${vagrantURI}"
-	curl -LRO ${hashiMirror}${vagrantURI} && open $(basename ${vagrantURI})
+	echo "vagrant was not found in the PATH. It can be downloaded from ${hashiMirror}/vagrant/"
+	curl -kLRO ${hashiMirror}${vagrantURI} && open $(basename ${vagrantURI})
 fi
