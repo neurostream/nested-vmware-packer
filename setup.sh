@@ -10,6 +10,7 @@ then
 	echo "This setup script is for Darwin (macOS / OSX )." 1>&2
 	echo "Please ensure you have the following binaries in your execute PATH:" 1>&2
 	echo "git" 1>&2
+	echo "VBoxManage" 1>&2
 	echo "vagrant" 1>&2
 	exit 1
 fi
