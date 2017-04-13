@@ -48,4 +48,5 @@ then
 	else
 		echo "This setup routine was not able to run the Vagrant install."
 		echo "Vagrant can be downloaded from ${hashiMirror}/vagrant/"
+	fi
 fi
