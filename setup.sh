@@ -15,9 +15,9 @@ fi
 
 
 
-if ! xcode-select --print-path 
+if ! xcode-select --print-path 2>/dev/null
 	then
-	if  ! git version 
+	if  ! git version 2>/dev/null
 	then
 		echo "git is required, offering XCode CLI Dev Tools. . ."
 	xcode-select --install
@@ -32,7 +32,7 @@ EOD
 	fi
 fi
 
-if ! vagrant version 
+if ! vagrant version 2>/dev/null
 then
 	hashiMirror="https://releases.hashicorp.com"
 	vagrantURI=$(curl -s ${hashiMirror}"$(curl -s ${hashiMirror}/vagrant/ | grep -E "/vagrant/[0-9]" | sort -n | tail -1 | awk -F '\"' '{print $2}')" | grep -i dmg | awk -F 'href=' '{print $2}' | awk -F '"' '{print $2}')
