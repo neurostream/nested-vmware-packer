@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
 
 
-labRepo="https://github.com/neurostream/vagrant-lab.git"
-labHome=${HOME}/vagrant/lab
-mkdir -p ${labHome}
-cd ${labHome}
+cd /tmp/
 
 systemType=$(uname -s)
 if [[ "${systemType}" != "Darwin" ]]
@@ -53,15 +50,38 @@ then
 	fi
 fi
 
+if ! VBoxManage --version 2>/dev/null
+then
+	vbMirror="http://download.virtualbox.org/virtualbox"
+	vbVersion=$(curl -s ${vbMirror} | grep href= | grep -E "\"[0-9]" | grep -vE "RC|BETA" | awk -F '"' '{print $2}'  | awk -F '/' '{print $1}' | tail -1)
+	vbURI=$vbVersion/$(curl -s $vbMirror/$vbVersion | grep -i dmg | grep OSX | awk -F '"' '{print $2}')
+	echo "VBoxManage was not found in the execute PATH"
+	if curl -skLRO ${vbMirror}/${vbURI}
+	then
+		open $(basename ${vbURI})
+	else
+		echo "This setup routine was not able to run the Virtualbox install."
+		echo "Virtualbox can be downloaded from ${vbMirror}/virtualbox/"
+	fi
+fi
+
+
+
 echo "before cd to labHome ( ${labHome} )"
 pwd
 cd ${labHome}
 pwd
 
+labRepo="https://github.com/neurostream/vagrant-lab.git"
+projectsHome=${HOME}/vagrant/projects
+mkdir -p ${projectsHome}
+cd ${projectsHome}
+
 echo "Will attempt initial clone of git repo: ${labRepo}"
-git clone ${labRepo}
+git clone ${labRepo} .
 
 ls -lart
 
+vagrant up --install-provider
 
 
