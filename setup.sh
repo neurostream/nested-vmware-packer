@@ -33,8 +33,14 @@ EOD
 	fi
 fi
 
+until git version 2>/dev/null
+do
+
 echo "Results of checking for Git:"
 git version
+echo "Waiting for git to be runnable in the PATH"
+	sleep 5
+done
 
 
 if ! VBoxManage --version 2>/dev/null
