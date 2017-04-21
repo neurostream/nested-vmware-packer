@@ -59,7 +59,7 @@ Key preparation to getting VMware Player -driven Packer builds on CentOS 7 Linux
        - host-only network (VMnet1)
      - vmware-modconfig --console --install-all
      - service vmware restart
-     - vmware player host also running Docker.  Until using the netcfg tool to specify the bridging network (vmnet0), I wasn't sure if the docker0 device was in conflict.  To elimate that possibility, stopped Docker and removed ```ip link del docker0``` the docker0 device.
+     - vmware player host also running Docker.  Until using the netcfg tool to specify the bridging network (vmnet0), I wasn't sure if the docker0 device was in conflict.  To elimate that possibility, stopped Docker and removed ```ip link del docker0``` the docker0 device (also ```nmcli connection delete docker0``` if NetworkManager is in the mix).
      
 
 
