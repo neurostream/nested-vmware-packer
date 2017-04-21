@@ -1,8 +1,9 @@
 # packer vagrant vmware lab
+<pre>
 packer lab for nested+headless vmware player 12 for linux builds
     \-> vmware-iso -> OVA
     \-> vagrant postprocessor -> box file
-
+</pre>
 
 Notes related to provisioning a local environment for Vagrant use with parallel builds of an OVA for VMWare/ESX/ESXi/vSphere deployment.
 
