@@ -52,7 +52,9 @@ sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/dock
 sudo yum -y install docker-ce
 ```
 
-# hashiupdate.sh is a total hack that I only expect to make my life easier for a few weeks.  It relies on the naming scheme and the fastly mirror index that existed at the moment the script was written. example use: 
+hashiupdate.sh is a total hack that I only expect to make my life easier for a few weeks.
+It relies on the naming scheme and the Fastly mirror indexing that existed at the time of this writing this and the script itself. Example use: 
+
 ```
 hashiupdate.sh vagrant 
 hashiupdate.sh packer
