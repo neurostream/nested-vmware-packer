@@ -1,7 +1,9 @@
 # vagrant-lab
-resources provisioning a local environment
 
-CentOS 7 minimal
+Notes related to provisioning a local environment for Vagrant use with parallel builds of an OVA for VMWare/ESX/ESXi/vSphere deployment.
+
+CentOS 7 x86_64 minimal iso
+
 ```
 yum -y install git zip unzip telnet tcpdump nginx netcat nc bind-utils xterm xorg-x11-font-utils xorg-x11-fonts-Type1 xauth strace qemu perl open-vm-tools nmap lsof kernel kernel-headers kernel-devel gcc epel-release
 ```
@@ -32,7 +34,7 @@ key piecies were:
  - updating the /usr/lib/vmware-vix/vixwrapper-config.txt with version that matchs 
  - after the X-forwarded vmplayer launch , rebuild kernel mods
  - ensure CPU virtualization features are enabled in the bios ( or virtual bios, as was my case - nested vmplayer)
- - in the exec chain ( not sure if it was packer->vmrun->--or->vmplayer ), linux.iso was expected to be located under /usr/lib/vmware/isoimages/
+ - in the exec chain ( not sure if it was packer->vmrun->--or->vmplayer ), linux.iso was expected to be located under /usr/lib/vmware/isoimages/ AS WELL as wherever the provisioner file source location ( relative to the current working directy of the packer executable was run from)
  - the yum updated kernel-headers did not match the running kernel-version, which the UI launched kernel mod link was referencing. after kernel was updated and kernel-headers were the same, then things ran
  
 
