@@ -52,7 +52,14 @@ Key preparation to getting VMware Player -driven Packer builds on CentOS 7 Linux
  - ensure CPU virtualization features are enabled in the bios ( or virtual bios, as was my case - nested vmplayer)
  - in the exec chain ( not sure if it was packer->vmrun->--or->vmplayer ), linux.iso was expected to be located under /usr/lib/vmware/isoimages/ AS WELL as wherever the provisioner file source location ( relative to the current working directy of the packer executable was run from)
  - the yum updated kernel-headers did not match the running kernel-version, which the UI launched kernel mod link was referencing. after kernel was updated and kernel-headers were the same, then things ran
- 
+ - error message related to not being able to detect the IP address:
+     - /usr/lib/vmware/bin/vmware-netcfg to rebuild vmnet devices at the standard instance numbers for each net type:
+       - bridged network (VMnet0)
+       - NAT network (VMnet8) ...seems to be something special about having vmnet8 in place
+       - host-only network (VMnet1)
+     - vmware-modconfig --console --install-all
+     - service vmware restart
+     
 
 
 other notes for docker and hashicorp tool installs:
