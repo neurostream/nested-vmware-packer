@@ -1,4 +1,7 @@
 # packer vagrant vmware lab
+
+
+
 <pre>
 packer lab for nested+headless vmware player 12 for linux builds
     \-> vmware-iso -> OVA
@@ -67,3 +70,6 @@ It relies on Hashicorp's naming scheme and the Fastly mirror indexing format tha
 hashiupdate.sh vagrant 
 hashiupdate.sh packer
 ```
+
+
+I'm using templates and provisioners from the boxcutter/centos repo.  good stuff.
