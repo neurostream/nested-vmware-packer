@@ -34,8 +34,16 @@ ssh -XY to root@machine
 	vmplayer
 		UI prompts
 		rebuild kernel modules
-		
-key piecies were:
+
+This Packer -based runtime call stack looks like:
+
+
+build.sh
+  packer
+    vmrun
+      vmplayer
+      
+Key preparation to getting VMware Player -driven Packer builds on CentOS 7 Linux were:
  - updating the /usr/lib/vmware-vix/vixwrapper-config.txt with version that matchs 
  - after the X-forwarded vmplayer launch , rebuild kernel mods
  - ensure CPU virtualization features are enabled in the bios ( or virtual bios, as was my case - nested vmplayer)
