@@ -12,13 +12,6 @@
       "destination": "/tmp/linux.iso"
     },
     {
-      "type": "file",
-      "direction": "download",
-      "source": "/tmp/*rpm",
-      "only": ["vmware-iso"],
-      "destination": "./"
-    },
-    {
       "type": "shell",
       "execute_command": "sudo {{.Vars}} sh {{.Path}}",
       "scripts": [
@@ -28,6 +21,13 @@
         "scripts/cleanup.sh",
         "scripts/zerodisk.sh"
       ]
+    },
+    {
+      "type": "file",
+      "direction": "download",
+      "source": "/tmp/*rpm",
+      "only": ["vmware-iso"],
+      "destination": "./"
     }
   ],
   "post-processors": [
