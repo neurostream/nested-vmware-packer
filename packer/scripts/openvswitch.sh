@@ -20,8 +20,10 @@ mkdir -p ~/rpmbuild/SOURCES/
 ) 
 rpmbuild -bb --nocheck rhel/openvswitch_no_kmod.spec
 ls -l ~/rpmbuild/RPMS/x86_64/
-cp -v ~/rpmbuild/RPMS/x86_64/"$basefilename"*rpm /tmp/
-yum -y localinstall ~/rpmbuild/RPMS/x86_64/"$basefilename"*rpm
+cp -v ~/rpmbuild/RPMS/x86_64/*rpm /tmp/
+yum -y localinstall /tmp/"$basefilename"*rpm
 echo 'pathmunge /usr/share/openvswitch/scripts/ovs-ctl' > /etc/profile.d/openvswitch.sh
 chkconfig openvswitch on 
 service openvswitch restart
+cd && rm -rf openvswitch rpmbuild
+
