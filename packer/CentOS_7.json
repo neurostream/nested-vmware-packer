@@ -6,9 +6,17 @@
   "provisioners": [
     {
       "type": "file",
+      "direction": "upload",
       "source": "linux.iso",
       "only": ["vmware-iso"],
       "destination": "/tmp/linux.iso"
+    },
+    {
+      "type": "file",
+      "direction": "download",
+      "source": "/tmp/*rpm",
+      "only": ["vmware-iso"],
+      "destination": "./"
     },
     {
       "type": "shell",
