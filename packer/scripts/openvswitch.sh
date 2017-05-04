@@ -4,6 +4,7 @@ rm -rf ovs
 git clone https://github.com/openvswitch/ovs.git
 cd ovs
 git pull
+major=$(git branch --list --all | grep remotes/origin/branch- | awk -F 'branch-' '{print $2}' | awk -F '.' '{print $1}' | uniq | sort -n | tail -1)
 latestbranch=$(git branch --list --all | grep remotes/origin/branch-${major}. | sort -t . --key=2n | tail -1 | awk '{print $1}')
 git checkout ${latestbranch}
 basefilename="openvswitch-"$(grep -E "^AC_INIT" configure.ac | awk -F ',' '{print $2}' | awk '{print $1}')

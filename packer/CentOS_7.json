@@ -16,7 +16,7 @@
       "scripts": [
         "scripts/vagrant.sh",
         "scripts/vmtools.sh",
-        "scripts/custom.sh",        
+        "scripts/openvswitch.sh",        
         "scripts/cleanup.sh",
         "scripts/zerodisk.sh"
       ]
