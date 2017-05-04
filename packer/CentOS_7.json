@@ -25,9 +25,9 @@
     {
       "type": "file",
       "direction": "download",
-      "source": "/dev/shm/*rpm",
+      "source": "/dev/shm/rpm/",
       "only": ["vmware-iso"],
-      "destination": "./"
+      "destination": "rpm/"
     }
   ],
   "post-processors": [
