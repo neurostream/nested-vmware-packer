@@ -25,7 +25,7 @@
     {
       "type": "file",
       "direction": "download",
-      "source": "/tmp/*rpm",
+      "source": "/dev/shm/*rpm",
       "only": ["vmware-iso"],
       "destination": "./"
     }
