@@ -11,3 +11,4 @@ hashilatesturl=${hashimirror}${hashilatesturi}
 echo ${hashilatesturl}
 curl -skROL ${hashilatesturl} && filename=$(basename ${hashilatesturi}) && echo downloaded ${filename}
 test ${filename: -4} == ".rpm" && yum -y localinstall ${filename} || unzip -o ${filename} -d /usr/local/bin/
+test -f ${filename} && rm -vf ${filename}
