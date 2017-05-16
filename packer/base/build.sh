@@ -20,8 +20,6 @@ echo "isoname is ${isoname}"
 echo "isobasename is ${isobasename}"
 
 
-rm -vrf packer_cache ${isobasename}*box output-vmware-iso *-iso.ova
-
 packer build -force -only vmware-iso ${buildtarget}.json
 
 find outputArtifacts -type f -ls
