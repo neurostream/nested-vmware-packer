@@ -5,13 +5,6 @@
   },
   "provisioners": [
     {
-      "type": "file",
-      "direction": "upload",
-      "source": "inputArtifacts/linux.iso",
-      "only": ["vmware-iso"],
-      "destination": "/tmp/linux.iso"
-    },
-    {
       "type": "shell",
       "execute_command": "sudo {{.Vars}} sh {{.Path}}",
       "scripts": [
@@ -22,7 +15,7 @@
       "type": "file",
       "direction": "download",
       "source": "outputArtifacts/rpm/",
-      "only": ["vmware-iso"],
+      "only": ["vmware-vmx"],
       "destination": "rpm"
     }
   ],
