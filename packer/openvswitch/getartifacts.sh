@@ -1,9 +1,9 @@
 export buildtarget="${1:-centos-7}"
 mkdir -p inputArtifacts
 mkdir -p outputArtifacts
-export isobaseurl="http://mirrors.xmission.com/centos/7/isos/x86_64/"
-export isoname=$(find inputArtifacts -type f -iname \*${buildtarget}*iso)
-if [ -n "${isoname}" ]
+
+export ovaname=$(find inputArtifacts -type f -iname \*${buildtarget}*iso)
+if [ -n "${ovaname}" ]
 then
 	export isoname=$( basename "${isoname}" )
 else

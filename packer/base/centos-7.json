@@ -26,7 +26,7 @@
     {
       "type": "vagrant",
       "keep_input_artifact": true,
-      "output": "outputArtifacts/{{user `isobasename`}}-{{user `version`}}-{{.Provider}}.box"
+      "output": "outputArtifacts/{{user `isobasename`}}-{{.Provider}}.box"
     },
    {
       "type": "shell-local",
