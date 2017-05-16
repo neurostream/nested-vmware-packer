@@ -1,7 +1,7 @@
 {
   "variables": {
     "version": "{{env `version`}}",
-    "isobasename": "{{env `isobasename`}}"
+    "ovabasename": "{{env `ovabasename`}}"
   },
   "provisioners": [
     {
@@ -22,7 +22,7 @@
   "builders": [
     {
       "type": "vmware-vmx",
-      "source_path": "inputArtifacts/{{user `isobasename`}}.vmx",
+      "source_path": "inputArtifacts/{{user `ovabasename`}}.vmx",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
       "ssh_wait_timeout": "10m",
