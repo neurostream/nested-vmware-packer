@@ -20,13 +20,6 @@
         "scripts/cleanup.sh",
         "scripts/zerodisk.sh"
       ]
-    },
-    {
-      "type": "file",
-      "direction": "download",
-      "source": "outputArtifacts/rpm/",
-      "only": ["vmware-iso"],
-      "destination": "rpm"
     }
   ],
   "builders": [
