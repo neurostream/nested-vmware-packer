@@ -24,5 +24,5 @@ rm -vrf packer_cache ${isobasename}*box output-vmware-iso *-iso.ova
 
 packer build -force -only vmware-iso ${buildtarget}.json
 
-ls -lartd CentOS*vmware* rpm/*rpm 
+find outputArtifacts -type f -ls
 test -d /openshare/artifacts && cp -r -f -v outputArtifacts/* --target-directory=/openshare/artifacts/
