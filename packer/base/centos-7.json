@@ -22,7 +22,43 @@
       ]
     }
   ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "keep_input_artifact": true,
+      "output": "outputArtifacts/{{user `isobasename`}}-{{user `version`}}-{{.Provider}}.box"
+    },
+   {
+      "type": "shell-local",
+      "keep_input_artifact": true,
+      "inline": [" echo ---- BEGIN ENV SET INFO PASSED TO SHELL-LOCAL INLINE BLOCK ----; env; set; echo ---- END ENV SET INFO PASSED TO SHELL-LOCAL INLINE BLOCK ----; ovftool --acceptAllEulas --allowAllExtraConfig --allowExtraConfig --compress=9 --diskMode=thin --noSSLVerify --overwrite --powerOffSource --skipManifestCheck --targetType=OVA --X:noPrompting output-${PACKER_BUILDER_TYPE}/packer-${PACKER_BUILDER_TYPE}.vmx outputArtifacts/${isobasename}-${PACKER_BUILDER_TYPE}.ova "]
+   }
+  ],
   "builders": [
+    {
+      "type": "virtualbox-iso",
+      "iso_url": "inputArtifacts/{{user `isobasename`}}.iso",
+      "iso_checksum": "27bd866242ee058b7a5754e83d8ee8403e216b93d130d800852a96f41c34d86a",
+      "iso_checksum_type": "sha256",
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_wait_timeout": "10m",
+      "boot_command": [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
+      ],
+      "disk_size": "100000",
+      "hard_drive_interface": "sata",
+      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+      "guest_additions_sha256": "8f1aa5ffda9f9cfb1dd5faa1fafd909763a1f6204cce2045e0912a2583ba75e9",
+      "guest_os_type": "RedHat_64",
+      "headless": true,
+      "http_directory": "http",
+      "shutdown_command": "sudo /sbin/halt -p",
+      "vboxmanage": [
+        [ "modifyvm", "{{.Name}}", "--memory", "512" ],
+        [ "modifyvm", "{{.Name}}", "--cpus", "1" ]
+      ]
+    },
     {
       "type": "vmware-iso",
       "iso_url": "inputArtifacts/{{user `isobasename`}}.iso",
