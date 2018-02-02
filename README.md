@@ -60,7 +60,25 @@ Key preparation to getting VMware Player -driven Packer builds on CentOS 7 Linux
      - vmware-modconfig --console --install-all
      - service vmware restart
      - vmware player host also running Docker.  Until using the netcfg tool to specify the bridging network (vmnet0), I wasn't sure if the docker0 device was in conflict.  To elimate that possibility, stopped Docker and removed ```ip link del docker0``` the docker0 device (also ```nmcli connection delete docker0``` if NetworkManager is in the mix).
-     
+     - after a later RedHat kernel update for EL7.4 reached my CentOS host, vmware would no longer start.  My particular combination of EL7 kernel and VMWare version matched this vmware community thread: https://communities.vmware.com/thread/567498 .  Working through that ( a patch community.vmware.com member "dariusd" - thank you! - to compat_netdevice.h in the vmnet module ) resolved the issue.  It went something like:
+
+```
+vmware_libdir=$(awk '$1~/^libdir/{print $3}' /etc/vmware/config | xargs echo)
+if test -f ${vmware_libdir}/modules/source/vmnet.tar
+then
+mkdir ~/vmnet-fix
+cd ~/vmnet-fix
+curl -kROL https://communities.vmware.com/servlet/JiveServlet/download/2686431-179601/VMware-Workstation-12.5.7-vmnet-RHEL74.patch.zip
+cp ${vmware_libdir}/modules/source/vmnet.tar ./vmnet-12.5.7.tar
+tar xf vmnet-12.5.7.tar
+patch -p0 < ~/vmnet-fix/VMware-Workstation-12.5.7-vmnet-RHEL74.patch
+tar cf vmnet.tar vmnet-only/
+sudo cp vmnet.tar ${vmware_libdir}/modules/source/vmnet.tar
+sudo vmware-modconfig --console --install-all
+else
+echo vmware_libdir evaluated to \"${vmware_libdir}\" and ${vmware_libdir}/modules/source/vmnet.tar does not exist
+fi
+```
 
 
 other notes for docker and hashicorp tool installs:
