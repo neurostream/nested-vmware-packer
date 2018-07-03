@@ -1,10 +1,12 @@
-# packer vagrant vmware lab
-
 
 Before delving into the maddness below, make sure you haven't missed any of this awesomeness:
 
 - https://www.spinnaker.io/setup/bakery/ 
 - https://github.com/docker/infrakit
+
+
+# packer vagrant vmware lab
+
 
 
 <pre>
