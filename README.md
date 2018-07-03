@@ -1,6 +1,11 @@
 # packer vagrant vmware lab
 
 
+Before delving into the maddness below, make sure you haven't missed any of this awesomeness:
+
+- https://www.spinnaker.io/setup/bakery/ 
+- https://github.com/docker/infrakit
+
 
 <pre>
 packer lab for nested+headless vmware player 12 for linux builds
