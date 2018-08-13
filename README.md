@@ -76,9 +76,10 @@ then
 mkdir ~/vmnet-fix
 cd ~/vmnet-fix
 curl -kROL https://communities.vmware.com/servlet/JiveServlet/download/2686431-179601/VMware-Workstation-12.5.7-vmnet-RHEL74.patch.zip
-unzip VMware-Workstation-12.5.7-vmnet-RHEL74.patch.zip
+unzip -o VMware-Workstation-12.5.7-vmnet-RHEL74.patch.zip
 unalias cp && cp -f ${vmware_libdir}/modules/source/vmnet.tar ./vmnet-12.5.7.tar
 tar xf vmnet-12.5.7.tar
+yum -y install patch
 patch -p0 < ~/vmnet-fix/VMware-Workstation-12.5.7-vmnet-RHEL74.patch
 tar cf vmnet.tar vmnet-only/
 sudo cp vmnet.tar ${vmware_libdir}/modules/source/vmnet.tar
