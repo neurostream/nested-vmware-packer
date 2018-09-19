@@ -65,6 +65,8 @@ Key preparation to getting VMware Player -driven Packer builds on CentOS 7 Linux
        - NAT network (VMnet8) ...seems to be something special about having vmnet8 in place
        - host-only network (VMnet1)
      - vmware-modconfig --console --install-all
+     - re-import network config
+       - touch /etc/vmware/placeholder && vmware-networks --migrate-network-settings /etc/vmware/placeholder && vmware-networks --start && rm /etc/vmware/placeholder
      - service vmware restart
      - vmware player host also running Docker.  Until using the netcfg tool to specify the bridging network (vmnet0), I wasn't sure if the docker0 device was in conflict.  To elimate that possibility, stopped Docker and removed ```ip link del docker0``` the docker0 device (also ```nmcli connection delete docker0``` if NetworkManager is in the mix).
      - after a later RedHat kernel update for EL7.4 reached my CentOS host, vmware would no longer start.  My particular combination of EL7 kernel and VMWare version matched this vmware community thread: https://communities.vmware.com/thread/567498 .  Working through that ( a patch community.vmware.com member "dariusd" - thank you! - to compat_netdevice.h in the vmnet module ) resolved the issue.  It went something like:
