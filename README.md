@@ -65,6 +65,10 @@ Key preparation to getting VMware Player -driven Packer builds on CentOS 7 Linux
        - NAT network (VMnet8) ...seems to be something special about having vmnet8 in place
        - host-only network (VMnet1)
      - vmware-modconfig --console --install-all
+     - if /dev/vmmon wasn't created, then:
+       - eval $(dmesg | grep 'Module vmmon: registered with' | tail -1  |&  awk '{print $8}')
+       - eval $(dmesg | grep 'Module vmmon: registered with' | tail -1  |&  awk '{print $9}')
+       - mknod /dev/vmmon c $major $minor
      - re-import network config
        - touch /etc/vmware/placeholder && vmware-networks --migrate-network-settings /etc/vmware/placeholder && vmware-networks --start && rm /etc/vmware/placeholder
      - service vmware restart
