@@ -7,7 +7,7 @@ Before delving into the maddness below, make sure you haven't missed any of this
 
 # self-contained portable build environment for packer-driven vmware ova
 
-
+This has been a great capability to enable on build system agents ( such as Bamboo or Jenkins build worker machines ) and has been essential for enabling a Packer Build + Terraform Deploy pipeline.
 
 <pre>
 packer lab for nested+headless vmware player 12 for linux builds
