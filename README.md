@@ -5,17 +5,14 @@ Before delving into the maddness below, make sure you haven't missed any of this
 - https://github.com/docker/infrakit
 
 
-# packer vagrant vmware lab
+# self-contained portable build environment for packer-driven vmware ova
 
 
 
 <pre>
 packer lab for nested+headless vmware player 12 for linux builds
     \-> vmware-iso -> OVA
-    \-> vagrant postprocessor -> box file
 </pre>
-
-Notes related to provisioning a local environment for Vagrant use with parallel builds of an OVA for VMWare/ESX/ESXi/vSphere deployment.
 
 CentOS 7 x86_64 minimal iso
 
